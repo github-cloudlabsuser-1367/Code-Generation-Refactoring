@@ -1,14 +1,11 @@
-#A poorly written example of a program in Python. It prompts the user for the number of elements to sum, takes those integers as input, and handles some basic error cases
+# This program calculates the sum of user-provided integers with basic error handling.
 
 import sys
 
 MAX = 100
 
 def calculate_sum(arr):
-    result = 0
-    for num in arr:
-        result += num
-    return result
+    return sum(arr)
 
 def main():
     try:
@@ -18,17 +15,18 @@ def main():
             sys.exit(1)
 
         arr = []
-
         print(f"Enter {n} integers:")
-        for _ in range(n):
-            try:
-                arr.append(int(input()))
-            except ValueError:
-                print("Invalid input. Please enter valid integers.")
-                sys.exit(1)
+
+        for i in range(n):
+            while True:
+                try:
+                    value = int(input(f"Element {i+1}: "))
+                    arr.append(value)
+                    break
+                except ValueError:
+                    print("Invalid input. Please enter a valid integer.")
 
         total = calculate_sum(arr)
-
         print("Sum of the numbers:", total)
 
     except KeyboardInterrupt:
